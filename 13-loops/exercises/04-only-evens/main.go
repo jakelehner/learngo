@@ -8,6 +8,12 @@
 
 package main
 
+import (
+	"fmt"
+	"os"
+	"strconv"
+)
+
 // ---------------------------------------------------------
 // EXERCISE: Only Evens
 //
@@ -28,4 +34,44 @@ package main
 // ---------------------------------------------------------
 
 func main() {
+	if len(os.Args) < 3 {
+		fmt.Println("Usage: [min] [max]")
+		return
+	}
+
+	min, err := strconv.Atoi(os.Args[1])
+
+	if err != nil {
+		fmt.Println("Invalid min")
+		return
+	}
+
+	max, err := strconv.Atoi(os.Args[2])
+
+	if err != nil {
+		fmt.Println("Invalid max")
+		return
+	}
+
+	if max <= min {
+		fmt.Println("MAX must be smaller than MIN")
+		return
+	}
+
+	sum := 0
+	for i := min; i <= max; i++ {
+		if i%2 != 0 {
+			continue
+		}
+
+		sum += i
+
+		if i != max {
+			fmt.Printf("%d + ", i)
+		} else {
+			fmt.Printf("%d = ", i)
+		}
+	}
+
+	fmt.Printf("%d\n", sum)
 }

@@ -20,12 +20,17 @@ import (
 // Refactor it and use named constants instead
 
 func main() {
+	const (
+		f2m = 0.3048
+		f2y = 0.3333
+	)
+
 	arg := os.Args[1]
 
 	feet, _ := strconv.ParseFloat(arg, 64)
 
-	meters := feet * 0.3048
-	yards := feet * 0.3333
+	meters := feet * f2m
+	yards := feet * f2y
 
 	fmt.Printf("%g feet is %g meters.\n", feet, meters)
 	fmt.Printf("%g feet is %g yards.\n", feet, yards)

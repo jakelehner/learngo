@@ -27,6 +27,7 @@ queries:
 
 	search:
 		for i, w := range words {
+			fmt.Println(w)
 			switch q {
 			case "and", "or", "the":
 				break search

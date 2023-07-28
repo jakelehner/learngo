@@ -8,6 +8,8 @@
 
 package main
 
+import "fmt"
+
 // ---------------------------------------------------------
 // EXERCISE: TAU
 //
@@ -25,4 +27,10 @@ func main() {
 	// Why it doesn't work?
 
 	// const pi, tau = 3.14159265358979323846264, pi * 2
+	const (
+		pi  = 3.14159265358979323846264
+		tau = pi * 2
+	)
+
+	fmt.Printf("tau = %.15f", tau)
 }

@@ -8,6 +8,12 @@
 
 package main
 
+import (
+	"fmt"
+	"os"
+	"strconv"
+)
+
 // ---------------------------------------------------------
 // EXERCISE: Dynamic Table
 //
@@ -53,5 +59,46 @@ package main
 //    3    0    3    6    9
 // ---------------------------------------------------------
 
+const (
+	maxTableSize = 10
+)
+
 func main() {
+	args := os.Args[1:]
+
+	if len(args) != 1 {
+		fmt.Printf("Provide table size between 1 and %d.\n", maxTableSize)
+		return
+	}
+
+	size, err := strconv.Atoi(args[0])
+	if err != nil {
+		fmt.Println("Not a number.")
+		return
+	}
+
+	if size < 0 {
+		fmt.Println("Please pick a positive number.")
+		return
+	}
+
+	for row := 0; row < size; row++ {
+		if row == 0 {
+			fmt.Printf("%4s", "X")
+		} else {
+			fmt.Printf("%4d", row)
+		}
+
+		for col := 0; col < size; col++ {
+			if row == 0 {
+				fmt.Printf("%4d", col)
+			} else {
+				fmt.Printf("%4d", col*row)
+			}
+		}
+
+		fmt.Println()
+
+	}
+
 }

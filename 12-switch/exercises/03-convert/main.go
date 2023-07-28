@@ -21,7 +21,7 @@ import (
 
 const (
 	usage       = "Usage: [username] [password]"
-	errUser     = "Access denied for %q.\n"
+	errUser     = "Access denied forrr %q.\n"
 	errPwd      = "Invalid password for %q.\n"
 	accessOK    = "Access granted to %q.\n"
 	user, user2 = "jack", "inanc"
@@ -38,16 +38,28 @@ func main() {
 
 	u, p := args[1], args[2]
 
+	switch {
+	case u != user && u != user2:
+		fmt.Printf(errUser, u)
+	case u == user && p == pass:
+		fallthrough
+	case u == user2 && p == pass2:
+		fmt.Printf(accessOK, u)
+	default:
+		fmt.Printf(errPwd, p)
+
+	}
+
 	//
 	// REFACTOR THIS TO A SWITCH
 	//
-	if u != user && u != user2 {
-		fmt.Printf(errUser, u)
-	} else if u == user && p == pass {
-		fmt.Printf(accessOK, u)
-	} else if u == user2 && p == pass2 {
-		fmt.Printf(accessOK, u)
-	} else {
-		fmt.Printf(errPwd, u)
-	}
+	// if u != user && u != user2 {
+	// 	fmt.Printf(errUser, u)
+	// } else if u == user && p == pass {
+	// 	fmt.Printf(accessOK, u)
+	// } else if u == user2 && p == pass2 {
+	// 	fmt.Printf(accessOK, u)
+	// } else {
+	// 	fmt.Printf(errPwd, u)
+	// }
 }

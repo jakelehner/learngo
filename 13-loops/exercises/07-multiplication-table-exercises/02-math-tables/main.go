@@ -8,6 +8,13 @@
 
 package main
 
+import (
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
+
 // ---------------------------------------------------------
 // EXERCISE: Math Tables
 //
@@ -104,5 +111,72 @@ package main
 //     go run main.go "*" 4
 // ---------------------------------------------------------
 
+const (
+	validOps = "%*/+-"
+	usageMsg = "Usage: [op=*/+-%] [size]"
+)
+
 func main() {
+	args := os.Args[1:]
+
+	if len(args) < 1 {
+		fmt.Println(usageMsg)
+		return
+	}
+
+	if len(args) < 2 {
+		fmt.Println("Size is missing")
+		fmt.Println(usageMsg)
+		return
+	}
+
+	op := args[0]
+
+	if strings.IndexAny(op, validOps) < 0 {
+		fmt.Println("Inlvalid Operator")
+		fmt.Println("Valid operators: " + validOps)
+		return
+	}
+
+	size, err := strconv.Atoi(args[1])
+	if err != nil {
+		fmt.Println("Inlvalid number")
+		return
+	}
+
+	if size < 0 {
+		fmt.Println("Please pick a positive number.")
+		return
+	}
+
+	for row := 0; row <= size; row++ {
+		if row == 0 {
+			fmt.Printf("%4s", op)
+		} else {
+			fmt.Printf("%4d", row)
+		}
+
+		for col := 0; col <= size; col++ {
+			if row == 0 {
+				fmt.Printf("%4d", col)
+			} else {
+				switch op {
+				case "*":
+					fmt.Printf("%4d", col*row)
+				case "/":
+					fmt.Printf("%4d", col/row)
+				case "+":
+					fmt.Printf("%4d", col+row)
+				case "-":
+					fmt.Printf("%4d", col-row)
+				case "%":
+					fmt.Printf("%4d", col%row)
+				}
+
+			}
+		}
+
+		fmt.Println()
+
+	}
 }
