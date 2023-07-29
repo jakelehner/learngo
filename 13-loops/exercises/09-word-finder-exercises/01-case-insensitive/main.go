@@ -8,6 +8,12 @@
 
 package main
 
+import (
+	"fmt"
+	"os"
+	"strings"
+)
+
 // ---------------------------------------------------------
 // EXERCISE: Case Insensitive Search
 //
@@ -24,5 +30,19 @@ package main
 //  the "lazy" keyword.
 // ---------------------------------------------------------
 
+const corpus = "lazy cat jumps again and again and again"
+
 func main() {
+
+	query := os.Args[1:]
+
+	for _, q := range query {
+		// case insensitive search
+		q = strings.ToLower(q)
+		i := strings.Index(corpus, q)
+		if i > -1 {
+			fmt.Printf("Found Term: %s\n", q)
+		}
+	}
+
 }
